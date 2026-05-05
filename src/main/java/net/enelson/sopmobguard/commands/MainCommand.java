@@ -16,11 +16,11 @@ public class MainCommand implements CommandExecutor {
 			return true;
 		
 		if(args.length > 0 && args[0].equalsIgnoreCase("reload")) {
+			SopMobGuard.getInstance().getConfigManager().reloadConfigs();
 			if(sender instanceof Player)
 				sender.sendMessage(Message.PLUGIN_RELOADED.getMessageWithPlaceholders((Player)sender));
 			else
-				sender.sendMessage(Message.PLUGIN_RELOADED.getDefautMessage());
-			SopMobGuard.getInstance().getConfigManager().reloadConfigs();
+				sender.sendMessage(Message.PLUGIN_RELOADED.getMessage());
 			
 			return true;
 		}

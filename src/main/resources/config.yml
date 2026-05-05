@@ -1,1 +1,5 @@
-protected-monster-name: "Astract"
+protected-monster-name: "protected"
+
+messages:
+  only-player: "The command can only be used by a player."
+  plugin-reloaded: "The plugin has been reloaded."

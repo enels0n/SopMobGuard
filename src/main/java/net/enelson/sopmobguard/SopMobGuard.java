@@ -1,14 +1,12 @@
 package net.enelson.sopmobguard;
 
 import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.google.common.reflect.ClassPath;
-
 import net.enelson.sopmobguard.commands.MainCommand;
 import net.enelson.sopmobguard.configs.ConfigManager;
+import net.enelson.sopmobguard.listeners.Handler;
 
 public class SopMobGuard extends JavaPlugin {
 	private static SopMobGuard plugin;
@@ -19,17 +17,7 @@ public class SopMobGuard extends JavaPlugin {
 		this.configs = new ConfigManager(this);
 		
 		PluginManager pluginManager = Bukkit.getPluginManager();
-		try {
-			String pac = "net.enelson.sopmobguard.listeners";
-			for (ClassPath.ClassInfo clazzInfo : ClassPath.from(getClassLoader()).getTopLevelClasses(pac)) {
-				Class<?> clazz = Class.forName(clazzInfo.getName());
-				if (Listener.class.isAssignableFrom(clazz)) {
-					pluginManager.registerEvents((Listener) clazz.getDeclaredConstructor().newInstance(), this);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		pluginManager.registerEvents(new Handler(), this);
 		
 		getCommand("sopmobguard").setExecutor(new MainCommand());
 	}

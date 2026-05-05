@@ -19,7 +19,7 @@ public enum Message {
 	}
 	
 	public String getMessage() {
-		String result = SopMobGuard.getInstance().getConfigManager().getLocale().getString(this.path);
+		String result = SopMobGuard.getInstance().getConfigManager().getConfigs().getString("messages." + this.path);
 		if(result != null) return result;
 		return this.message;
 	}
